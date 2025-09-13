@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.models.products;
 import com.example.demo.repository.ProductsRepository;
 
-@CrossOrigin(origins = {"http://localhost:5173/"}, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH, RequestMethod.DELETE})
+@CrossOrigin(origins = {"http://localhost:5173"}, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH, RequestMethod.DELETE})
 @RestController
 @RequestMapping("/products")
 public class ProductsController {
