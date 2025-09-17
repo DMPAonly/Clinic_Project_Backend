@@ -29,4 +29,9 @@ public class PaymentConfig {
         String checkoutPageUrl = standardCheckoutPayResponse.getRedirectUrl();
         return checkoutPageUrl;
     }
+
+    public void fun(){
+        
+    }
 }
+//Test
