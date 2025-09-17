@@ -14,6 +14,7 @@ public class orders {
     private int quantity;
     private String address;
     private int pincode;
+    private int amount;
 
     public String getId() {
         return id;
@@ -77,6 +78,14 @@ public class orders {
 
     public void setPincode(int pincode){
         this.pincode = pincode;
+    }
+
+    public int getAmount(){
+        return amount;
+    }
+
+    public void setAmount(int amount){
+        this.amount = amount;
     }
 
 }
