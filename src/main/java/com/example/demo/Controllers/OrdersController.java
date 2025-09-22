@@ -1,6 +1,7 @@
 package com.example.demo.Controllers;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,9 @@ public class OrdersController {
 
     @PostMapping("/placeOrder")
     public String placeOrder(@RequestBody orders order) {
+        if(order.getId() == null || order.getId().isEmpty()){
+            order.setId(UUID.randomUUID().toString());
+        }
         String orderId = order.getId();
         int orderAmount = order.getAmount();
         return paymentConfig.initiatePayment(orderId, orderAmount);
