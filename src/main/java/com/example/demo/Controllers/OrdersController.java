@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ public class OrdersController {
         this.paymentConfig = paymentConfig;
     }
 
-    @GetMapping("getOrders")
+    @GetMapping("/getOrders")
     public List<orders> getOrders() {
         return ordersRepository.findAll();
     }
@@ -36,8 +37,22 @@ public class OrdersController {
         }
         String orderId = order.getId();
         int orderAmount = order.getAmount();
+        ordersRepository.save(order);
         return paymentConfig.initiatePayment(orderId, orderAmount);
-        //ordersRepository.save(order);
+        //
         //return "Order Placed";
+    }
+
+    @GetMapping("/getStatus/{id}")
+    public String getOrderStatus(@PathVariable String id) {
+        String status = paymentConfig.OrderStatus(id);
+        if("FAILED".equals(status) || "PENDING".equals(status)) {
+            deleteOrder(id);
+        }
+        return status;
+    }
+
+    public void deleteOrder(String id) {
+        ordersRepository.deleteById(id);
     }
 }
